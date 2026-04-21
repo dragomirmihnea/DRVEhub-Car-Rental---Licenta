@@ -1,0 +1,52 @@
+<%- include("partials/header") %>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <h2 class="mt-4" style="color: var(--orange-main);">Editează <%= masina.marca %> <%= masina.model %></h2>
+  
+  <form action="/edit/<%= masina.id %>" method="POST" class="bg-dark p-4 rounded shadow mt-4">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="text-secondary">Marcă</label>
+        <input type="text" name="marca" class="form-control" value="<%= masina.marca %>" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="text-secondary">Model</label>
+        <input type="text" name="model" class="form-control" value="<%= masina.model %>" required>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label class="text-secondary">Preț (€/zi)</label>
+        <input type="number" name="pret" class="form-control" value="<%= masina.pret_zi %>" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label class="text-secondary">Kilometraj (km)</label>
+        <input type="number" name="km" class="form-control" value="<%= masina.km %>">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label class="text-secondary">Status</label>
+        <select name="status" class="form-select">
+          <option value="Disponibil" <%= masina.status === 'Disponibil' ? 'selected' : '' %>>Disponibil</option>
+          <option value="Închiriat" <%= masina.status === 'Închiriat' ? 'selected' : '' %>>Închiriat</option>
+          <option value="Mentenanță" <%= masina.status === 'Mentenanță' ? 'selected' : '' %>>Mentenanță</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="text-secondary">Motorizare</label>
+        <input type="text" name="motor" class="form-control" value="<%= masina.motor %>">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="text-secondary">Consum (L/100km)</label>
+        <input type="text" name="consum" class="form-control" value="<%= masina.consum %>">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-warning w-100 mt-3">Actualizează Toate Datele</button>
+  </form>
+</main>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,109 @@
+<%- include("partials/header") %>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4 text-white">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
+        <div>
+            <h1 class="h2 fw-bold mb-0" style="color: var(--orange-main);">Adaugă Mașină Nouă</h1>
+            <p class="text-secondary small mb-0">Introduceți datele complete pentru a genera profilul în flotă.</p>
+        </div>
+        <a href="/" class="btn btn-outline-light btn-sm"><i class="bi bi-arrow-left me-1"></i> Înapoi la listă</a>
+    </div>
+
+    <div class="card bg-dark border-secondary p-4 shadow-lg mb-5" style="background-color: #1a1a1a !important;">
+        <form action="/add-car" method="POST" class="row g-3">
+            
+            <div class="col-12 mt-4 mb-2">
+                <h6 class="text-info text-uppercase fw-bold small"><i class="bi bi-card-text me-2"></i>Identitate Vehicul</h6>
+                <hr class="border-secondary opacity-25">
+            </div>
+            
+            <div class="col-md-4">
+                <label class="form-label small text-secondary">Marcă Autoturism</label>
+                <input type="text" name="marca" class="form-control bg-dark text-white border-secondary shadow-none" required placeholder="ex: Audi">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small text-secondary">Model</label>
+                <input type="text" name="model" class="form-control bg-dark text-white border-secondary shadow-none" required placeholder="ex: R8">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small text-secondary">An Fabricație</label>
+                <input type="number" name="an" class="form-control bg-dark text-white border-secondary shadow-none" required placeholder="2024">
+            </div>
+
+            <div class="col-12 mt-5 mb-2">
+                <h6 class="text-warning text-uppercase fw-bold small"><i class="bi bi-gear-wide-connected me-2"></i>Date Tehnice & Mentenanță</h6>
+                <hr class="border-secondary opacity-25">
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label small text-secondary">KM Actuali (în bord)</label>
+                <input type="number" name="km" class="form-control bg-dark text-white border-secondary shadow-none" required placeholder="0">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small text-secondary">Limită Revizie (KM)</label>
+                <input type="number" name="revizieLaKM" class="form-control bg-dark text-white border-secondary shadow-none" required placeholder="15000">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small text-secondary">Motorizare (ex: 2.0 TDI)</label>
+                <input type="text" name="motor" class="form-control bg-dark text-white border-secondary shadow-none" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small text-secondary">Consum (L/100km)</label>
+                <input type="text" name="consum" class="form-control bg-dark text-white border-secondary shadow-none" required placeholder="7.5">
+            </div>
+
+            <div class="col-12 mt-5 mb-2">
+                <h6 class="text-success text-uppercase fw-bold small"><i class="bi bi-briefcase me-2"></i>Configurare Business</h6>
+                <hr class="border-secondary opacity-25">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label small text-secondary">Preț Închiriere (€ / zi)</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-secondary border-secondary text-white">€</span>
+                    <input type="number" name="pret" class="form-control bg-dark text-white border-secondary shadow-none" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small text-secondary">Status Inițial</label>
+                <select name="status" class="form-select bg-dark text-white border-secondary shadow-none">
+                    <option value="Disponibil" selected>Disponibil (În parcare)</option>
+                    <option value="Închiriat">Închiriat (La client)</option>
+                    <option value="Mentenanță">Mentenanță (În service)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small text-secondary">Tip Combustibil</label>
+                <select name="combustibil" class="form-select bg-dark text-white border-secondary shadow-none">
+                    <option value="Benzină">Benzină</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Hibrid">Hibrid</option>
+                </select>
+            </div>
+
+            <div class="col-12 mt-5">
+                <button type="submit" class="btn btn-lg w-100 fw-bold py-3" style="background-color: #ff6600; color: white; border: none; transition: 0.3s;">
+                    <i class="bi bi-cloud-arrow-up-fill me-2"></i>SALVEAZĂ MAȘINA ÎN FLOTĂ
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%- include("partials/footer") %>
+
+<style>
+    /* Efect de hover pe butonul portocaliu */
+    button[type="submit"]:hover {
+        background-color: #e65c00 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3);
+    }
+    /* Eliminăm outline-ul albastru de la browser */
+    .form-control:focus, .form-select:focus {
+        border-color: #ff6600 !important;
+        background-color: #222 !important;
+        color: white;
+    }
+</style>

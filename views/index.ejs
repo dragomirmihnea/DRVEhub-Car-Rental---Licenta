@@ -1,0 +1,80 @@
+<%- include("partials/header") %>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-secondary">
+    <h1 class="h2" style="color: var(--orange-main); font-weight: 800;">Gestionare Flotă</h1>
+    <a href="/add" class="btn btn-outline-warning shadow-sm">
+    <i class="bi bi-plus-lg"></i> Adaugă Mașină
+</a>
+  </div>
+
+  <div class="table-responsive shadow-lg mt-4" style="border-radius: 12px; border: 1px solid var(--purple-accent); background-color: var(--black-matte);">
+    <table class="table table-dark table-hover mb-0">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--orange-main);">
+          <th class="p-3 text-secondary">ID</th>
+          <th class="p-3">Marcă & Model</th>
+          <th class="p-3">Preț (€/zi)</th>
+          <th class="p-3">Status</th>
+          <th class="p-3 text-end">Acțiuni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% masini.forEach(car => { %>
+          <tr style="border-bottom: 1px solid rgba(59, 24, 95, 0.5); vertical-align: middle;">
+            <td class="p-3 text-secondary">#<%= car.id %></td>
+            <td class="p-3">
+    <a href="/car/<%= car.id %>" class="text-decoration-none">
+        <strong style="color: var(--orange-main);"><%= car.marca %></strong> 
+        <span class="text-light ms-1"><%= car.model %></span>
+    </a>
+</td>
+            <td class="p-3 text-white"><%= car.pret %> €</td>
+            <td class="p-3">
+              <span class="badge rounded-pill <%= car.status === 'Disponibil' ? 'bg-success' : (car.status === 'Închiriat' ? 'bg-danger' : 'bg-warning text-dark') %>">
+                <%= car.status %>
+              </span>
+            </td>
+            <td class="p-3 text-end">
+    <a href="/edit/<%= car.id %>" class="btn btn-sm btn-outline-info me-1">
+    <i class="bi bi-pencil-square"></i>
+</a>
+    
+    <button class="btn btn-sm btn-outline-danger" 
+            onclick="prepareDelete('<%= car.id %>')" 
+            data-bs-toggle="modal" 
+            data-bs-target="#deleteModal">
+        <i class="bi bi-trash3"></i>
+    </button>
+</td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-white" style="background-color: var(--black-matte); border: 2px solid var(--purple-accent); border-radius: 15px;">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" style="color: var(--orange-main);">Confirmă Ștergerea</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Sigur vrei să elimini această mașină din flotă? Acțiunea este ireversibilă.
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary text-white" data-bs-dismiss="modal">Anulează</button>
+        <form id="confirmDeleteForm" action="/delete" method="POST">
+            <input type="hidden" name="id" id="carIdToDelete">
+            <button type="submit" class="btn btn-danger" style="background-color: #dc3545; border: none;">
+                Șterge definitiv
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

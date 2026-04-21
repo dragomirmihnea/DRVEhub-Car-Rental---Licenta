@@ -1,0 +1,51 @@
+<%- include("partials/header") %>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4 text-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 fw-bold" style="color: var(--orange-main);">Analiză Costuri & Profit Net</h1>
+        <div class="bg-dark p-3 rounded border border-success">
+            <small class="text-secondary text-uppercase d-block">Profit Net Flotă (Luna Aceasta)</small>
+            <span class="fs-3 fw-bold text-success"><%= totalNet.toLocaleString() %> €</span>
+        </div>
+    </div>
+
+    <div class="card bg-dark border-0 shadow">
+        <div class="table-responsive">
+            <table class="table table-dark align-middle mb-0">
+                <thead style="background: #252525;">
+                    <tr>
+                        <th class="p-4 border-0">Vehicul</th>
+                        <th class="p-4 border-0 text-center text-info">Venit Brut</th>
+                        <th class="p-4 border-0 text-center text-danger">Mentenanță + Gaz</th>
+                        <th class="p-4 border-0 text-end text-success">Profit Curat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% masini.sort((a, b) => b.profitNet - a.profitNet).forEach(car => { %>
+                    <tr style="border-bottom: 1px solid #2d2d2d;">
+                        <td class="p-4">
+                            <div class="fw-bold"><%= car.marca %> <%= car.model %></div>
+                            <small class="text-muted">ID #<%= car.id %></small>
+                        </td>
+                        <td class="p-4 text-center text-info fw-bold"><%= car.venitBrut %> €</td>
+                        <td class="p-4 text-center">
+                            <span class="text-danger">- <%= car.costuri %> €</span>
+                            <br>
+                            <small class="text-muted" style="font-size: 0.7rem;">
+                                (M: <%= car.mentenantaLuna %>€ | C: <%= car.combustibilLuna %>€)
+                            </small>
+                        </td>
+                        <td class="p-4 text-end">
+                            <span class="fs-5 fw-bold <%= car.profitNet > 0 ? 'text-success' : 'text-danger' %>">
+                                <%= car.profitNet.toLocaleString() %> €
+                            </span>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<%- include("partials/footer") %>
