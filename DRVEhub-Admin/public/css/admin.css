@@ -1,0 +1,70 @@
+:root {
+    --purple-deep: #2A0944;  /* Fundalul mare */
+    --purple-accent: #3B185F; /* Sidebar / Navbar / Hover */
+    --black-matte: #151515;   /* Carduri / Tabele */
+    --orange-main: #FF6500;   /* Accente butoane */
+    --text-muted: #b5a4c4;
+}
+
+body {
+    background-color: var(--purple-deep);
+    color: white;
+    margin: 0;
+}
+
+/* Navbar de sus */
+.navbar {
+    background-color: var(--black-matte) !important;
+    border-bottom: 1px solid var(--purple-accent);
+}
+
+.navbar-brand {
+    background-color: var(--purple-accent);
+    color: var(--orange-main) !important;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--purple-accent) !important;
+    border-right: 1px solid var(--purple-deep); /* Am schimbat aici pentru un contrast mai bun */
+    min-height: 100vh;
+}
+
+/* Butoane Meniu */
+.nav-link {
+    color: #ccc !important;
+    margin: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    color: var(--orange-main) !important;
+    background-color: rgba(255, 101, 0, 0.1);
+}
+
+.nav-link.active {
+    color: var(--orange-main) !important;
+    background-color: rgba(255, 101, 0, 0.2);
+    font-weight: bold;
+}
+
+/* Input Cautare */
+.form-control-dark {
+    background-color: var(--black-matte) !important;
+    border: 1px solid var(--purple-accent) !important;
+    color: white !important;
+}
+
+.form-control-dark:focus {
+    border-color: var(--orange-main) !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 101, 0, 0.25);
+    background-color: var(--black-matte) !important;
+    color: white;
+}
+
+.modal-backdrop.show {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.7);
+}

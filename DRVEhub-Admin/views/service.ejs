@@ -1,0 +1,51 @@
+<%- include("partials/header") %>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4 text-white">
+    <h1 class="h2 fw-bold mb-4" style="color: var(--orange-main);">
+        <i class="bi bi-tools me-2"></i> Jurnal Intervenții Service
+    </h1>
+
+    <div class="row">
+        <% if (masini.length === 0) { %>
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-check2-all display-1 text-success"></i>
+                <p class="fs-4 mt-3">Toate mașinile sunt pe drum! Nicio intervenție activă.</p>
+            </div>
+        <% } else { %>
+            <% masini.forEach(car => { %>
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-dark border-secondary h-100 shadow-sm" style="border-left: 5px solid var(--orange-main) !important;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <h5 class="card-title mb-0"><%= car.marca %> <%= car.model %></h5>
+                                <span class="badge bg-warning text-dark">În Lucru</span>
+                            </div>
+                            
+                            <div class="bg-black bg-opacity-50 p-3 rounded mb-3">
+                                <label class="text-secondary small text-uppercase fw-bold">Descriere Lucrare:</label>
+                                <p class="mb-0 text-info fw-bold"><%= car.reparatie ? car.reparatie.descriere : "Mentenanță generală" %></p>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col-6 border-end border-secondary">
+                                    <small class="text-secondary d-block">Cost Estimat</small>
+                                    <span class="fs-5 fw-bold text-danger"><%= car.reparatie ? car.reparatie.cost : car.mentenantaLuna %> €</span>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-secondary d-block">Timp Execuție</small>
+                                    <span class="fs-5 fw-bold text-white"><%= car.reparatie ? car.reparatie.timp : "Nespecificat" %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-secondary d-flex justify-content-between">
+                            <small class="text-muted">ID Vehicul: #<%= car.id %></small>
+                            <a href="/car/<%= car.id %>" class="btn btn-sm btn-outline-light">Vezi Fișa Mașinii</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</main>
+
+<%- include("partials/footer") %>
